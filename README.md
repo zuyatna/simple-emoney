@@ -55,4 +55,4 @@ simple-emoney/
 Project stucture may be change during development.
 
 ## Wiki
-https://github.com/zuyatna/simple-emoney.wiki.git
+[https://github.com/zuyatna/simple-emoney.wiki.git](https://github.com/zuyatna/simple-emoney/wiki)
