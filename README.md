@@ -31,7 +31,7 @@ simple-emoney/
 │   │       ├── auth_service.go
 │   │       ├── transaction_service.go
 │   │       └── user_service.go
-│   ├── domain/
+│   ├── model/
 │   │   ├── auth.go
 │   │   ├── transaction.go
 │   │   └── user.go
