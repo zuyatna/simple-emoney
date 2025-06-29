@@ -31,8 +31,8 @@ services:
       APP_PORT: 8081
       JWT_SECRET_KEY: supersecretkey
       # PostgreSQL config
-      DB_HOST: db
-      DB_PORT: 5432
+      DB_HOST: localhost
+      DB_PORT: 5433
       DB_USER: zuyatna
       DB_PASSWORD: supersmash69
       DB_NAME: simple-emoney
