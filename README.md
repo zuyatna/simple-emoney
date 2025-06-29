@@ -50,7 +50,7 @@ simple-emoney/
 ```
 
 ## Work in progress!!
-Project structure may be change during development.
+Project structure may be changed during development.
 
 ## Wiki
 [https://github.com/zuyatna/simple-emoney.wiki.git](https://github.com/zuyatna/simple-emoney/wiki)
