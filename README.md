@@ -4,9 +4,6 @@ Roadmap project structure:
 
 ```
 simple-emoney/
-├── cmd/
-│   └── api/
-│       └── main.go
 ├── config/
 │   └── config.go
 ├── db/
@@ -48,11 +45,12 @@ simple-emoney/
 ├── docker-compose.yml
 ├── go.mod
 ├── go.sum
+├── main.go
 └── README.md
 ```
 
 ## Work in progress!!
-Project stucture may be change during development.
+Project structure may be change during development.
 
 ## Wiki
 [https://github.com/zuyatna/simple-emoney.wiki.git](https://github.com/zuyatna/simple-emoney/wiki)
