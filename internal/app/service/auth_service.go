@@ -56,7 +56,10 @@ func (s *authService) RegisterUser(req *model.RegisterRequest) (*model.User, err
 		return nil, fmt.Errorf("failed to create user: %w", err)
 	}
 
-	s.redisRepo.SetUserCache(user, 1*time.Hour)
+	err = s.redisRepo.SetUserCache(user, 1*time.Hour)
+	if err != nil {
+		return nil, err
+	}
 
 	return user, nil
 }
@@ -80,7 +83,10 @@ func (s *authService) LoginUser(req *model.LoginRequest) (*model.LoginResponse, 
 		return nil, fmt.Errorf("failed to generate token: %w", err)
 	}
 
-	s.redisRepo.SetAuthToken(token, user.ID.String(), 24*time.Hour)
+	err = s.redisRepo.SetAuthToken(token, user.ID.String(), 24*time.Hour)
+	if err != nil {
+		return nil, err
+	}
 
 	return &model.LoginResponse{
 		UserID:   user.ID.String(),
