@@ -37,3 +37,23 @@ func (uh *UserHandler) TopUpBalance(c *gin.Context) {
 		"message": "Balance topped up successfully",
 	})
 }
+
+func (uh *UserHandler) GetUserBalance(c *gin.Context) {
+	// user ID should come from authenticated context
+	userID := c.GetString("userID") // set by authenticated middleware
+	if userID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User ID is empty"})
+		return
+	}
+
+	balance, err := uh.userService.GetUserBalance(userID)
+	if err != nil {
+		log.Printf("Error getting balance: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"user_id": userID,
+		"balance": balance,
+	})
+}
