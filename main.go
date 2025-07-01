@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"github.com/redis/go-redis/v9"
 	"log"
-	"net/http"
 	"simple-emoney/config"
+	"simple-emoney/internal/router"
 	"simple-emoney/pkg/database"
 )
 
@@ -34,8 +34,10 @@ func main() {
 		}
 	}(redisClient)
 
+	r := router.SetupRouter(cfg)
+
 	log.Printf("Server is running on port %s", cfg.AppPort)
-	if err := http.ListenAndServe(":"+cfg.AppPort, nil); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
+	if err := r.Run(":" + cfg.AppPort); err != nil {
+		log.Fatalf("Server failed to start: %v", err)
 	}
 }
