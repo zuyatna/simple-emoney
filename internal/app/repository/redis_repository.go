@@ -15,7 +15,7 @@ type RedisRepository interface {
 	GetUserCache(userID string) (*model.User, error)
 	DeleteUserCache(userID string) error
 	SetAuthToken(token string, userID string, duration time.Duration) error
-	GetUserAuthToken(token string) (string, error)
+	GetAuthToken(token string) (string, error)
 	DeleteAuthToken(token string) error
 }
 
@@ -64,7 +64,7 @@ func (r redisRepository) SetAuthToken(token string, userID string, duration time
 	return r.client.Set(context.Background(), key, userID, duration).Err()
 }
 
-func (r redisRepository) GetUserAuthToken(token string) (string, error) {
+func (r redisRepository) GetAuthToken(token string) (string, error) {
 	key := fmt.Sprintf("token:%s", token)
 	userID, err := r.client.Get(context.Background(), key).Result()
 	if errors.Is(err, redis.Nil) {
