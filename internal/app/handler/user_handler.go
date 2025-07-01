@@ -42,7 +42,7 @@ func (uh *UserHandler) GetUserBalance(c *gin.Context) {
 	// user ID should come from authenticated context
 	userID := c.GetString("userID") // set by authenticated middleware
 	if userID == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "User ID is empty"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User ID is not found in context"})
 		return
 	}
 
