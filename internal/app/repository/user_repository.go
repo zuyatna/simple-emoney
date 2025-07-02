@@ -35,8 +35,8 @@ func (u userRepository) CreateUser(user *model.User) error {
 
 func (u userRepository) GetUserByUsername(username string) (*model.User, error) {
 	var user model.User
-	query := `SELECT id, username, balance, created_at, updated_at FROM users WHERE username = $1`
-	err := u.db.QueryRow(query, username).Scan(&user.ID, &user.Username, &user.Balance, &user.CreatedAt, &user.UpdatedAt)
+	query := `SELECT id, username, password_hash, balance, created_at, updated_at FROM users WHERE username = $1`
+	err := u.db.QueryRow(query, username).Scan(&user.ID, &user.Username, &user.PasswordHash, &user.Balance, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, nil
@@ -48,8 +48,8 @@ func (u userRepository) GetUserByUsername(username string) (*model.User, error) 
 
 func (u userRepository) GetUserByID(id uuid.UUID) (*model.User, error) {
 	var user model.User
-	query := `SELECT id, username, balance, created_at, updated_at FROM users WHERE id = $1`
-	err := u.db.QueryRow(query, id).Scan(&user.ID, &user.Username, &user.Balance, &user.CreatedAt, &user.UpdatedAt)
+	query := `SELECT id, username, password_hash, balance, created_at, updated_at FROM users WHERE id = $1`
+	err := u.db.QueryRow(query, id).Scan(&user.ID, &user.Username, &user.PasswordHash, &user.Balance, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, nil
