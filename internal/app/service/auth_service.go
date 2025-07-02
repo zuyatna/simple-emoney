@@ -70,12 +70,12 @@ func (s *authService) LoginUser(req *model.LoginRequest) (*model.LoginResponse, 
 		return nil, fmt.Errorf("failed to get user: %w", err)
 	}
 	if user == nil {
-		return nil, errors.New("user not found")
+		return nil, errors.New("invalid credentials")
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password))
 	if err != nil {
-		return nil, errors.New("invalid password")
+		return nil, errors.New("invalid credentials")
 	}
 
 	token, err := utils.GenerateJWTToken(user.ID, user.Username, s.cfg.JWTSecretKey)
@@ -83,6 +83,7 @@ func (s *authService) LoginUser(req *model.LoginRequest) (*model.LoginResponse, 
 		return nil, fmt.Errorf("failed to generate token: %w", err)
 	}
 
+	// optionally store token in Redis for logout/blacklist functionality
 	err = s.redisRepo.SetAuthToken(token, user.ID.String(), 24*time.Hour)
 	if err != nil {
 		return nil, err
