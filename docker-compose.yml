@@ -3,9 +3,9 @@ services:
     image: postgres:15-alpine
     restart: always
     environment:
-      POSTGRES_DB: simple-emoney
-      POSTGRES_USER: zuyatna
-      POSTGRES_PASSWORD: supersmash69
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/migration:/docker-entrypoint-initdb.d/
@@ -29,13 +29,13 @@ services:
       - "8081:8081"
     environment:
       APP_PORT: 8081
-      JWT_SECRET_KEY: supersecretkey
+      JWT_SECRET_KEY: jwtsecretkey
       # PostgreSQL config
       DB_HOST: db
       DB_PORT: 5432
-      DB_USER: zuyatna
+      DB_USER: postgres
       DB_PASSWORD: supersmash69
-      DB_NAME: simple-emoney
+      DB_NAME: postgres
       # Redis config
       REDIS_HOST: redis
       REDIS_PORT: 6379
