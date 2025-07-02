@@ -19,11 +19,11 @@ func NewTransactionRepository(db *sql.DB) TransactionRepository {
 	return &transactionRepository{db: db}
 }
 
-func (t transactionRepository) CreateTransaction(tx *sql.Tx, transaction *model.Transaction) error {
+func (t transactionRepository) CreateTransaction(sqlTx *sql.Tx, transaction *model.Transaction) error {
 	query := `INSERT INTO transactions (sender_id, receiver_id, amount, transaction_type) VALUES ($1, $2, $3, $4) RETURNING id, created_at`
-	err := tx.QueryRow(query, transaction.SenderID, transaction.ReceiverID, transaction.TransactionType).Scan(&transaction.ID, &transaction.CreatedAt)
+	err := sqlTx.QueryRow(query, transaction.SenderID, transaction.ReceiverID, transaction.Amount, transaction.TransactionType).Scan(&transaction.ID, &transaction.CreatedAt)
 	if err != nil {
-		return fmt.Errorf("error creating transaction: %w", err)
+		return fmt.Errorf("error creating transaction within transaction: %w", err)
 	}
 	return nil
 }
