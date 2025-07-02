@@ -45,7 +45,7 @@ func (a *AuthHandler) LoginUser(c *gin.Context) {
 	response, err := a.authService.LoginUser(&req)
 	if err != nil {
 		log.Printf("Failed to login user: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, response)
