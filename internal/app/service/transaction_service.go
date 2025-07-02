@@ -82,7 +82,7 @@ func (t transactionService) Transfer(senderID string, req *model.TransferRequest
 	}
 
 	// add to receiver's balance
-	err = t.userRepo.UpdateUserBalance(tx, sender.ID, req.Amount)
+	err = t.userRepo.UpdateUserBalance(tx, receiver.ID, req.Amount)
 	if err != nil {
 		// log specific error and ensure rollback is handled by defer
 		return fmt.Errorf("failed to add to receiver balance: %w", err)
