@@ -22,6 +22,7 @@ func (th *TransactionHandler) Transfer(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	log.Printf("Received transfer request: receiver_username=%s, amount=%.2f", req.ReceiverUsername, req.Amount)
 
 	senderID := c.GetString("userID")
 	if senderID == "" {
