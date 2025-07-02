@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/uuid"
+	"log"
 	"simple-emoney/internal/model"
 	"time"
 )
@@ -60,6 +61,7 @@ func (u userRepository) GetUserByID(id uuid.UUID) (*model.User, error) {
 }
 
 func (u userRepository) UpdateUserBalance(tx *sql.Tx, userID uuid.UUID, amount float64) error {
+	log.Printf("Executing UpdateUserBalance for user %s with amount %.2f", userID.String(), amount)
 	query := `UPDATE users SET balance = balance + $1, updated_at = $2 WHERE id = $3`
 	_, err := tx.Exec(query, amount, time.Now(), userID)
 	if err != nil {
