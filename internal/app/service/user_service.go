@@ -52,6 +52,7 @@ func (s *userService) TopUpBalance(req *model.TopUpRequest) error {
 	}
 	defer func(tx *sql.Tx) {
 		err := tx.Rollback()
+		log.Println("Recovered from panic during top-up, rolling back transaction")
 		if err != nil {
 			return
 		}
@@ -66,7 +67,7 @@ func (s *userService) TopUpBalance(req *model.TopUpRequest) error {
 		SenderID:        userID,
 		ReceiverID:      userID,
 		Amount:          req.Amount,
-		TransactionType: "top-up",
+		TransactionType: "topup",
 	}
 
 	err = s.transactionRepo.CreateTransaction(tx, transaction)
