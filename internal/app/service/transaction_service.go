@@ -67,7 +67,7 @@ func (t transactionService) Transfer(senderID string, req *model.TransferRequest
 		return errors.New("receiver not found")
 	}
 
-	if sender.ID != receiver.ID {
+	if sender.ID == receiver.ID {
 		return errors.New("cannot transfer to self")
 	}
 
