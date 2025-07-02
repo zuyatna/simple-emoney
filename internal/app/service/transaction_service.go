@@ -42,12 +42,15 @@ func (t transactionService) Transfer(senderID string, req *model.TransferRequest
 	if err != nil {
 		return fmt.Errorf("failed to begin transaction for transfer: %w", err)
 	}
-	defer func(tx *sql.Tx) {
-		err := tx.Rollback()
-		if err != nil {
-			log.Fatalf("Failed to rollback transaction: %v", err)
+	// NEW: flag to track if the transaction has been committed
+	committed := false
+	defer func() {
+		if !committed { // only rollback if not already committed
+			if rbErr := tx.Rollback(); rbErr != nil {
+				log.Printf("Failed to rollback transaction: %v", rbErr) // log the rollback error, don't return it
+			}
 		}
-	}(tx) // ensure rollback if anything goes wrong
+	}()
 
 	// get sender (for update, use FOR UPDATE in real scenario to prevent race condition)
 	sender, err := t.userRepo.GetUserByID(senderIDStr) // in a real scenario, fetch with FOR UPDATE
@@ -74,6 +77,8 @@ func (t transactionService) Transfer(senderID string, req *model.TransferRequest
 	if sender.Balance < req.Amount {
 		return errors.New("insufficient balance")
 	}
+
+	log.Printf("Transferring amount %.2f from sender %s to receiver %s", req.Amount, sender.Username, receiver.Username)
 
 	// deduct from sender's balance
 	err = t.userRepo.UpdateUserBalance(tx, sender.ID, -req.Amount)
