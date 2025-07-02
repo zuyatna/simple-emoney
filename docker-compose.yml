@@ -34,7 +34,7 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: postgres
-      DB_PASSWORD: supersmash69
+      DB_PASSWORD: password
       DB_NAME: postgres
       # Redis config
       REDIS_HOST: redis
