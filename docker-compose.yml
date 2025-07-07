@@ -3,9 +3,10 @@ services:
     image: postgres:15-alpine
     restart: always
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      # PostgreSQL config
+      POSTGRES_DB: postgres # DB_NAME
+      POSTGRES_USER: postgres # DB_USER
+      POSTGRES_PASSWORD: password # DB_PASSWORD
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/migration:/docker-entrypoint-initdb.d/
@@ -33,9 +34,9 @@ services:
       # PostgreSQL config
       DB_HOST: db
       DB_PORT: 5432
+      DB_NAME: postgres
       DB_USER: postgres
       DB_PASSWORD: password
-      DB_NAME: postgres
       # Redis config
       REDIS_HOST: redis
       REDIS_PORT: 6379
