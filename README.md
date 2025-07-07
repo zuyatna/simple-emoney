@@ -49,6 +49,9 @@ simple-emoney/
 └── README.md
 ```
 
+## Database Schema
+![Database schema](images/database-schema.png)
+
 ## Work in progress!!
 Project structure may be changed during development.
 
