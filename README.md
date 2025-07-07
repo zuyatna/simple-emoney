@@ -49,6 +49,9 @@ simple-emoney/
 └── README.md
 ```
 
+## Work in Progress!
+Masih dalam tahap pengembangan.
+
 ## Database Schema
 ![Database schema](images/database-schema.png)
 
