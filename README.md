@@ -73,5 +73,12 @@ Ketika kamu sudah meng-install Docker, kamu bisa cek apakah aplikasi tersebut su
 Buka program `Terminal` atau `Command Prompt`. Lalu ketikan `docker`, maka akan menampilkan seperti gambar berikut:
 ![CMD](images/cmd.png)
 
+Jika aplikasi Docker sudah dikenali oleh sistem operasi, kamu bisa jalankan perintah berikut di direktori tempat program `simple-emoney` ini berada.
+```docker-compose -up ---build```
+
+Seperti gambar berikut:
+
+![docker-compose up --build](images/docker-compose-build.png)
+
 ## Wiki
 [https://github.com/zuyatna/simple-emoney.wiki.git](https://github.com/zuyatna/simple-emoney/wiki)
