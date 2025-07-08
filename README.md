@@ -67,5 +67,11 @@ Ubah konfigurasi (config) yang ada di `.env` dan sesuai kan dengan keinginan kal
 
 Jika kamu mengubah konfigurasi pada `.env` maka kamu harus sesuaikan juga konfigurasi tersebut pada `docker-compose.yml`.
 
+## Menjalankan Program
+Ketika kamu sudah meng-install Docker, kamu bisa cek apakah aplikasi tersebut sudah bisa dijalankan.
+
+Buka program `Terminal` atau `Command Prompt`. Lalu ketikan `docker`, maka akan menampilkan seperti gambar berikut:
+![CMD](images/cmd.png)
+
 ## Wiki
 [https://github.com/zuyatna/simple-emoney.wiki.git](https://github.com/zuyatna/simple-emoney/wiki)
